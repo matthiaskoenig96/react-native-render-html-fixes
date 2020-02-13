@@ -181,6 +181,13 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                 return undefined;
             }
 
+            if (key === 'textAlign' && value === 'start') {
+                value = 'left';
+            }
+            if (key === 'textAlign' && value === 'end') {
+                value = 'right';
+            }
+
             if (typeof value === 'string') {
                 if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1) {
                     return undefined;
