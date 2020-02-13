@@ -2,10 +2,10 @@ import { PERC_SUPPORTED_STYLES, STYLESETS, ABSOLUTE_FONT_SIZE, stylePropTypes } 
 import { generateDefaultBlockStyles, generateDefaultTextStyles } from './HTMLDefaultStyles';
 
 /**
-* Converts a html style string to an object
-* @param str: the style string
-* @return the style as an obect
-*/
+ * Converts a html style string to an object
+ * @param str: the style string
+ * @return the style as an obect
+ */
 export function cssStringToObject (str) {
     return str
         .split(';')
@@ -181,14 +181,8 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                 return undefined;
             }
 
-            if (key === 'textAlign' && value === 'start') {
-                value = 'left';
-            }
-            if (key === 'textAlign' && value === 'end') {
-                value = 'right';
-            }
-
             if (typeof value === 'string') {
+
                 if (value.search('inherit') !== -1 || value.search('calc') !== -1 || value.search('normal') !== -1) {
                     return undefined;
                 }
@@ -215,6 +209,16 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                 if (key === 'fontSize') {
                     return mapAbsoluteFontSize(key, value);
                 }
+
+                if (key === 'textAlign' && value === 'start') {
+                    value = 'left';
+                    return [key, value];
+
+                }
+                if (key === 'textAlign' && value === 'end') {
+                    value = 'right';
+                    return [key, value];
+                }
             }
             return [key, value];
         })
@@ -226,10 +230,10 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
 }
 
 /**
-* @param {string} key: the key of style
-* @param {string} value: the value of style
-* @return {array}
-*/
+ * @param {string} key: the key of style
+ * @param {string} value: the value of style
+ * @return {array}
+ */
 function mapAbsoluteFontSize (key, value) {
     let fontSize = value;
     if (ABSOLUTE_FONT_SIZE.hasOwnProperty(value)) {
@@ -239,10 +243,10 @@ function mapAbsoluteFontSize (key, value) {
 }
 
 /**
-* @param str: the css style string
-* @param styleset=STYLESETS.TEXT: the styleset to convert the styles against
-* @return a react native style object
-*/
+ * @param str: the css style string
+ * @param styleset=STYLESETS.TEXT: the styleset to convert the styles against
+ * @return a react native style object
+ */
 export function cssStringToRNStyle (str, styleset = STYLESETS.TEXT, options) {
     return cssToRNStyle(cssStringToObject(str), styleset, options);
 }
