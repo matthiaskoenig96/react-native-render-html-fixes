@@ -223,6 +223,10 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                     value = 'Arial';
                     return [key, value];
                 }
+                if (key === 'display') {
+                    value = 'none';
+                    return [key, value];
+                }
             }
             return [key, value];
         })
