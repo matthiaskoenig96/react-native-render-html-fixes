@@ -219,6 +219,10 @@ function cssToRNStyle (css, styleset, { emSize, ptSize, ignoredStyles, allowedSt
                     value = 'right';
                     return [key, value];
                 }
+                if (key === 'fontFamily') {
+                    value = 'Arial';
+                    return [key, value];
+                }
             }
             return [key, value];
         })
